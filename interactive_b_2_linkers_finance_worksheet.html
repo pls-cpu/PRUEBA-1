@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>B2 Linkers & Connectors Worksheet</title>
+  <style>
+    :root {
+      --bg: #f7f9fc;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #dbe3ee;
+      --accent: #234a8a;
+      --accent-2: #d93f49;
+      --ok: #1f7a3d;
+      --bad: #b42318;
+      --warn: #9a6700;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #234a8a, #426fb8);
+      color: white;
+      border-radius: 20px;
+      padding: 28px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 24px rgba(35, 74, 138, 0.15);
+    }
+
+    .hero h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+    }
+
+    .hero p {
+      margin: 0;
+      opacity: 0.95;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 18px 0 24px;
+    }
+
+    button {
+      border: none;
+      border-radius: 12px;
+      padding: 12px 16px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .primary { background: var(--accent); color: white; }
+    .secondary { background: white; color: var(--accent); border: 1px solid var(--border); }
+    .danger { background: var(--accent-2); color: white; }
+
+    .bank {
+      background: #eef4ff;
+      border: 1px solid #cfe0ff;
+      color: #17396b;
+      padding: 14px 16px;
+      border-radius: 16px;
+      margin-bottom: 24px;
+      font-weight: 700;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.04);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: var(--accent);
+    }
+
+    .instructions {
+      color: var(--muted);
+      margin-top: -4px;
+      margin-bottom: 16px;
+    }
+
+    .q {
+      padding: 14px 0;
+      border-top: 1px solid #edf2f7;
+    }
+
+    .q:first-of-type { border-top: none; }
+
+    label, .sentence {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    select, input[type="text"], textarea {
+      width: 100%;
+      padding: 11px 12px;
+      border-radius: 12px;
+      border: 1px solid #cfd8e3;
+      font-size: 0.98rem;
+      background: white;
+    }
+
+    textarea {
+      min-height: 84px;
+      resize: vertical;
+    }
+
+    .inline {
+      display: inline-block;
+      min-width: 180px;
+      max-width: 260px;
+      vertical-align: middle;
+      margin: 0 6px;
+    }
+
+    .feedback {
+      margin-top: 8px;
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .ok { color: var(--ok); }
+    .bad { color: var(--bad); }
+    .warn { color: var(--warn); }
+
+    .score {
+      position: sticky;
+      top: 12px;
+      z-index: 5;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .score strong { font-size: 1.05rem; }
+    .small { color: var(--muted); font-size: 0.92rem; }
+
+    .hidden { display: none; }
+
+    .answer-box {
+      background: #fff8e8;
+      border: 1px solid #f3dfaa;
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-top: 10px;
+      color: #6b4e00;
+    }
+
+    .footer-note {
+      text-align: center;
+      color: var(--muted);
+      margin: 28px 0 10px;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 720px) {
+      .hero h1 { font-size: 1.6rem; }
+      .inline { min-width: 100%; max-width: 100%; margin: 8px 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <h1>Worksheet – Linkers & Connectors (B2)</h1>
+      <p>Finance & Banking Context · Result · Contrast · Reason</p>
+    </div>
+
+    <div class="score">
+      <div>
+        <strong id="scoreText">Score: 0 / 25 auto-checked items</strong><br />
+        <span class="small">Parts 1, 2 and 4 are checked automatically. Parts 3 and 5 include model answers for self-correction.</span>
+      </div>
+      <div class="toolbar" style="margin:0;">
+        <button class="primary" onclick="checkAnswers()">Check answers</button>
+        <button class="secondary" onclick="toggleAnswers()">Show / hide model answers</button>
+        <button class="danger" onclick="resetWorksheet()">Reset</button>
+      </div>
+    </div>
+
+    <div class="bank">
+      Connector bank: ALTHOUGH · HOWEVER · BECAUSE · BECAUSE OF · DUE TO · THEREFORE · NEVERTHELESS · IN SPITE OF · AS A RESULT · EVEN THOUGH
+    </div>
+
+    <div class="grid">
+      <section class="card">
+        <h2>Part 1 – Fill in the gaps</h2>
+        <p class="instructions">Complete each sentence using one connector from the box. Some options may be used more than once.</p>
+        <div id="part1"></div>
+      </section>
+
+      <section class="card">
+        <h2>Part 2 – Choose the correct option</h2>
+        <p class="instructions">Select the best connector.</p>
+        <div id="part2"></div>
+      </section>
+
+      <section class="card">
+        <h2>Part 3 – Rewrite the sentences</h2>
+        <p class="instructions">Rewrite each sentence using the word in brackets. This section is for guided production, so model answers are provided for self-checking.</p>
+        <div id="part3"></div>
+      </section>
+
+      <section class="card">
+        <h2>Part 4 – Error correction</h2>
+        <p class="instructions">Each sentence has one mistake. Rewrite it correctly.</p>
+        <div id="part4"></div>
+      </section>
+
+      <section class="card">
+        <h2>Part 5 – Controlled writing</h2>
+        <p class="instructions">Complete the sentences with your own ideas. Use the connector given. Compare your answer with the model only after trying.</p>
+        <div id="part5"></div>
+      </section>
+    </div>
+
+    <p class="footer-note">Interactive worksheet created for online practice.</p>
+  </div>
+
+  <script>
+    const part1Data = [
+      {
+        id: 1,
+        sentence: 'The company reported strong quarterly earnings, ___ its stock price fell unexpectedly.',
+        answer: 'however'
+      },
+      {
+        id: 2,
+        sentence: '___ the increase in interest rates, mortgage applications declined significantly.',
+        answer: ['due to', 'because of']
+      },
+      {
+        id: 3,
+        sentence: 'The client refused to approve the transaction ___ concerns about regulatory compliance.',
+        answer: 'because of'
+      },
+      {
+        id: 4,
+        sentence: 'The bank improved its liquidity position; ___, it decided to delay new investments.',
+        answer: 'however'
+      },
+      {
+        id: 5,
+        sentence: '___ the risk assessment was incomplete, the loan was not approved.',
+        answer: 'because'
+      },
+      {
+        id: 6,
+        sentence: 'The audit revealed several inconsistencies. ___, the finance team initiated an internal investigation.',
+        answer: ['therefore', 'as a result']
+      },
+      {
+        id: 7,
+        sentence: '___ facing significant market volatility, the investment fund maintained stable returns.',
+        answer: 'even though'
+      },
+      {
+        id: 8,
+        sentence: 'The merger was finalized successfully ___ initial resistance from stakeholders.',
+        answer: 'in spite of'
+      },
+      {
+        id: 9,
+        sentence: 'The company experienced heavy losses ___ poor cash flow management.',
+        answer: 'because of'
+      },
+      {
+        id: 10,
+        sentence: 'The financial report was delayed ___ technical issues in the accounting system.',
+        answer: ['due to', 'because of']
+      },
+      {
+        id: 11,
+        sentence: 'The firm reduced operational costs; ___, profitability improved.',
+        answer: ['therefore', 'as a result']
+      },
+      {
+        id: 12,
+        sentence: '___ the economic outlook is uncertain, investors continue to show interest in emerging markets.',
+        answer: ['although', 'even though']
+      }
+    ];
+
+    const part2Data = [
+      {
+        id: 13,
+        sentence: 'The bank rejected the application ___ the client failed the credit check.',
+        options: ['because', 'however', 'therefore'],
+        answer: 'because'
+      },
+      {
+        id: 14,
+        sentence: 'The company expanded internationally, ___ facing strong competition.',
+        options: ['although', 'because of', 'therefore'],
+        answer: 'although'
+      },
+      {
+        id: 15,
+        sentence: '___ regulatory changes, several accounts had to be reviewed.',
+        options: ['Due to', 'However', 'Although'],
+        answer: 'due to'
+      },
+      {
+        id: 16,
+        sentence: 'The firm increased its capital reserves; ___ it is better prepared for future risks.',
+        options: ['because', 'therefore', 'even though'],
+        answer: 'therefore'
+      },
+      {
+        id: 17,
+        sentence: 'The transaction was completed successfully, ___ minor technical delays.',
+        options: ['in spite of', 'because', 'however'],
+        answer: 'in spite of'
+      }
+    ];
+
+    const part3Data = [
+      {
+        id: 18,
+        prompt: 'The company reduced its workforce because costs were too high. (DUE TO)',
+        model: 'The company reduced its workforce due to high costs.'
+      },
+      {
+        id: 19,
+        prompt: 'Although the market was unstable, the bank continued lending. (IN SPITE OF)',
+        model: 'In spite of the unstable market, the bank continued lending.'
+      },
+      {
+        id: 20,
+        prompt: 'The company missed its targets. As a result, investors lost confidence. (THEREFORE)',
+        model: 'The company missed its targets; therefore, investors lost confidence.'
+      },
+      {
+        id: 21,
+        prompt: 'The project was delayed because of regulatory issues. (BECAUSE)',
+        model: 'The project was delayed because regulatory issues arose.'
+      }
+    ];
+
+    const part4Data = [
+      {
+        id: 22,
+        prompt: 'The company increased its revenue, although profits also grew.',
+        answer: 'the company increased its revenue, and profits also grew.'
+      },
+      {
+        id: 23,
+        prompt: 'Due to the client was late with payments, the account was suspended.',
+        answer: 'because the client was late with payments, the account was suspended.'
+      },
+      {
+        id: 24,
+        prompt: 'The bank approved the loan because of the client has a strong credit history.',
+        answer: 'the bank approved the loan because the client has a strong credit history.'
+      },
+      {
+        id: 25,
+        prompt: 'In spite the high risk, the investment was approved.',
+        answer: 'in spite of the high risk, the investment was approved.'
+      }
+    ];
+
+    const part5Data = [
+      {
+        id: 26,
+        prompt: 'The company expanded into new markets; however, ...',
+        model: 'The company expanded into new markets; however, it faced stronger competition than expected.'
+      },
+      {
+        id: 27,
+        prompt: 'Due to stricter regulations, ...',
+        model: 'Due to stricter regulations, the bank had to review its compliance procedures.'
+      },
+      {
+        id: 28,
+        prompt: 'The bank improved its digital services; therefore, ...',
+        model: 'The bank improved its digital services; therefore, customer satisfaction increased.'
+      },
+      {
+        id: 29,
+        prompt: 'Although the client had a good financial record, ...',
+        model: 'Although the client had a good financial record, the loan was delayed pending final approval.'
+      }
+    ];
+
+    function normalize(text) {
+      return text
+        .toLowerCase()
+        .replace(/[“”‘’']/g, "")
+        .replace(/\s+/g, ' ')
+        .replace(/\s*([,.;:!?])\s*/g, '$1')
+        .trim();
+    }
+
+    function buildPart1() {
+      const container = document.getElementById('part1');
+      part1Data.forEach(q => {
+        const div = document.createElement('div');
+        div.className = 'q';
+        div.innerHTML = `
+          <label for="p1_${q.id}">${q.id}. ${q.sentence.replace('___', '')}</label>
+          <input id="p1_${q.id}" type="text" placeholder="Write the connector" />
+          <div id="fb_p1_${q.id}" class="feedback"></div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function buildPart2() {
+      const container = document.getElementById('part2');
+      part2Data.forEach(q => {
+        const options = ['<option value="">Choose one</option>']
+          .concat(q.options.map(opt => `<option value="${opt}">${opt}</option>`))
+          .join('');
+        const div = document.createElement('div');
+        div.className = 'q';
+        div.innerHTML = `
+          <label for="p2_${q.id}">${q.id}. ${q.sentence}</label>
+          <select id="p2_${q.id}">${options}</select>
+          <div id="fb_p2_${q.id}" class="feedback"></div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function buildPart3() {
+      const container = document.getElementById('part3');
+      part3Data.forEach(q => {
+        const div = document.createElement('div');
+        div.className = 'q';
+        div.innerHTML = `
+          <label for="p3_${q.id}">${q.id}. ${q.prompt}</label>
+          <textarea id="p3_${q.id}" placeholder="Rewrite the sentence here"></textarea>
+          <div id="ans_p3_${q.id}" class="answer-box hidden"><strong>Model answer:</strong> ${q.model}</div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function buildPart4() {
+      const container = document.getElementById('part4');
+      part4Data.forEach(q => {
+        const div = document.createElement('div');
+        div.className = 'q';
+        div.innerHTML = `
+          <label for="p4_${q.id}">${q.id}. ${q.prompt}</label>
+          <input id="p4_${q.id}" type="text" placeholder="Write the corrected sentence" />
+          <div id="fb_p4_${q.id}" class="feedback"></div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function buildPart5() {
+      const container = document.getElementById('part5');
+      part5Data.forEach(q => {
+        const div = document.createElement('div');
+        div.className = 'q';
+        div.innerHTML = `
+          <label for="p5_${q.id}">${q.id}. ${q.prompt}</label>
+          <textarea id="p5_${q.id}" placeholder="Write your idea here"></textarea>
+          <div id="ans_p5_${q.id}" class="answer-box hidden"><strong>Model answer:</strong> ${q.model}</div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function setFeedback(id, ok, message, warn = false) {
+      const el = document.getElementById(id);
+      el.className = 'feedback ' + (warn ? 'warn' : ok ? 'ok' : 'bad');
+      el.textContent = message;
+    }
+
+    function checkAnswers() {
+      let score = 0;
+      const total = 25;
+
+      part1Data.forEach(q => {
+        const value = normalize(document.getElementById(`p1_${q.id}`).value);
+        const answers = Array.isArray(q.answer) ? q.answer : [q.answer];
+        const correct = answers.map(normalize).includes(value);
+        if (correct) {
+          score++;
+          setFeedback(`fb_p1_${q.id}`, true, 'Correct');
+        } else if (!value) {
+          setFeedback(`fb_p1_${q.id}`, false, 'Please complete this item.', true);
+        } else {
+          setFeedback(`fb_p1_${q.id}`, false, `Not quite. Try again.`);
+        }
+      });
+
+      part2Data.forEach(q => {
+        const value = normalize(document.getElementById(`p2_${q.id}`).value);
+        const correct = value === normalize(q.answer);
+        if (correct) {
+          score++;
+          setFeedback(`fb_p2_${q.id}`, true, 'Correct');
+        } else if (!value) {
+          setFeedback(`fb_p2_${q.id}`, false, 'Please choose an option.', true);
+        } else {
+          setFeedback(`fb_p2_${q.id}`, false, `Incorrect.`);
+        }
+      });
+
+      part4Data.forEach(q => {
+        const value = normalize(document.getElementById(`p4_${q.id}`).value);
+        const correct = value === normalize(q.answer);
+        if (correct) {
+          score++;
+          setFeedback(`fb_p4_${q.id}`, true, 'Correct');
+        } else if (!value) {
+          setFeedback(`fb_p4_${q.id}`, false, 'Please correct the sentence.', true);
+        } else {
+          setFeedback(`fb_p4_${q.id}`, false, 'Not correct yet. Review the connector form.');
+        }
+      });
+
+      document.getElementById('scoreText').textContent = `Score: ${score} / ${total} auto-checked items`;
+    }
+
+    function toggleAnswers() {
+      document.querySelectorAll('.answer-box').forEach(el => el.classList.toggle('hidden'));
+    }
+
+    function resetWorksheet() {
+      document.querySelectorAll('input[type="text"], textarea').forEach(el => el.value = '');
+      document.querySelectorAll('select').forEach(el => el.selectedIndex = 0);
+      document.querySelectorAll('.feedback').forEach(el => {
+        el.textContent = '';
+        el.className = 'feedback';
+      });
+      document.querySelectorAll('.answer-box').forEach(el => el.classList.add('hidden'));
+      document.getElementById('scoreText').textContent = 'Score: 0 / 25 auto-checked items';
+    }
+
+    buildPart1();
+    buildPart2();
+    buildPart3();
+    buildPart4();
+    buildPart5();
+  </script>
+</body>
+</html>
